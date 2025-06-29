@@ -15,14 +15,18 @@ pip install cryptography
 ```
 
 ## Usage
-
-`python chat.py <IP_Adress> <Port> <Username> <Mode>`
-*Note: on UNIX systems you may just run ./chat*
+```
+python chat.py <IP_Adress> <Port> <Username> <Mode>
+```
+*Note: on UNIX systems you may just run ./chat*  
 
 **IP_Adress** specifies the IP adress of server to connect, or to listen if you are the server.  
+  
 **Port** specifies the Port of server to connect, or to listen if you're the server.  
+  
 **Username** specifies your Username. It doesn't affect anything, but your appearence in chat.  
-*Note: Username shouldn't be larger then 30 bytes. 1 Byte is 1 Symbol in ASCII, but in UTF symbols might be larger*
+*Note: Username shouldn't be larger then 30 bytes. 1 Byte is 1 Symbol in ASCII, but in UTF symbols might be larger*  
+  
 **Mode** specifies in which mode you run: Server(serv) or Client(clnt). Server listens on its own adress and Client connects to it, so Server should run first.  
 
 You also should set up a Virtual Network to be able to connect to each other. (Radmin VPN or Hamachi will do it)
