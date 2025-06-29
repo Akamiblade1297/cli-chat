@@ -64,6 +64,7 @@ def Handle_Client(conn: socket.socket, name: str, key: bytes):
     print(f"{name}: {ans.decode()}")
 
 def Handle_Connection(func: Callable, conn: socket.socket, name: str, key: bytes):
+    print(f"\nThe begining of chat with {name}")
     try:
         while True:
             func(conn, name, key)
@@ -73,7 +74,7 @@ def Handle_Connection(func: Callable, conn: socket.socket, name: str, key: bytes
     except Exception as e:
         print(f"Catched an unexpected error: {e}")
     finally:
-        print("Connection was closed.")
+        print("\nConnection was closed.")
 
 
 HOST      = sys.argv[1]
