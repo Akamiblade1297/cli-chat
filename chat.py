@@ -128,9 +128,9 @@ def Handle_Connection(func: Callable, conn: socket.socket, name: str, key: bytes
     except KeyboardInterrupt: ''
     except BrokenPipeError: ''
     except Exception as e:
-        print(f"Catched an unexpected error: {e}")
+        print(f"\033[31mCatched an unexpected error: {e}\033[0m")
     finally:
-        print("\nConnection was closed.")
+        print("\n\033[31mConnection was closed.\033[0m")
 
 
 MODE      = sys.argv[1]
@@ -147,12 +147,12 @@ host = socket.socket()
 if MODE == "serv":
     host.bind(( HOST, PORT ))
     host.listen(1)
-    print('\033[32mWaiting for client to connect..')
+    print('\033[32mWaiting for client to connect..\033[0m')
     conn, addr = host.accept()
-    print(f'Connection received from client on {addr[0]}:{addr[1]}. Exchanging session key.')
+    print(f'\033[32mConnection received from client on {addr[0]}:{addr[1]}. Exchanging session key.\033[0m')
     shared_key = Exchange_Key_Server(conn)
     key = Derive_Session_Key(shared_key)
-    print("Session key exchanged. Connection is secure.\033[0m")
+    print("\033[32mSession key exchanged. Connection is secure.\033[0m")
 
     CLNT_NAME = Decrypt_Data(conn.recv(64), key).decode()
     conn.send(Encrypt_Data(HOST_NAME.encode(), key))
@@ -160,14 +160,14 @@ if MODE == "serv":
     Handle_Connection(Handle_Server, conn, CLNT_NAME, key)
 
 elif MODE == "clnt":
-    print("\033[32mConnecting to server..")
+    print("\033[32mConnecting to server..\033[0m")
     host.connect((HOST, PORT))
     conn = host
 
-    print(f'Connected to server on {HOST}:{PORT}. Exchanging session key.')
+    print(f'\033[32mConnected to server on {HOST}:{PORT}. Exchanging session key.\033[0m')
     shared_key = Exchange_Key_Client(conn)
     key = Derive_Session_Key(shared_key)
-    print("Session key exchanged. Connection is secure.\033[0m")
+    print("\033[32mSession key exchanged. Connection is secure.\033[0m")
 
     conn.send(Encrypt_Data(HOST_NAME.encode(), key))
     SERV_NAME = Decrypt_Data(conn.recv(64), key).decode()
