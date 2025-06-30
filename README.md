@@ -29,7 +29,7 @@ python chat.py <Mode> <IP_Adress> <Port> <Username> <Password>
 **Username** specifies your Username. It doesn't affect anything, but your appearence in chat.  
 *Note: Username shouldn't be larger then 30 bytes. 1 Byte is 1 Symbol in ASCII, but in UTF symbols might be larger*  
   
-**Password** password is used to generate MACs *(Message Authentication Code)* for public keys to protect connection from MITM *(Man In the Middle)* Attack, it's still not necessary tho.  
+**Password** password is used to generate MACs for public keys to protect connection from MITM Attack, it's still not necessary tho.  
 
 You also should set up a Virtual Network to be able to connect to each other. (Radmin VPN or Hamachi will do it)
 
@@ -67,10 +67,10 @@ Connection was closed.
 
 ## Is that really secure?
 
-Yes. It's using Elliptic Curve Diffie-Hellman Ephemeral(ECDHE) Algorithm for exchanging Session Key, HKDF-SHA256 diveration and AES256 for encrypting all messages.  
+Yes. It's using ECDHE Algorithm for exchanging Session Key, HKDF-SHA256 diveration and AES-256 for encrypting all messages.  
 It is commonly used in websites.  
 
-Since I can't obtain a trusted CA signature, I use Password to generate a key using pbkdf2, that is used generate MACs for public keys.  
+Since I can't obtain a trusted CA signature, I use Password to generate a key using PBKDF2, that is used generate MACs for public keys.  
 That way, if MITM Attack happens, they wouldn't be able to generate new MAC without having a key.
 
 ---
